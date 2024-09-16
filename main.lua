@@ -7,10 +7,13 @@ end
 -- REQUIRE MODULES --
 Vector2 = require "res.lib.Vector2"
 Workspace = require "res.lib.Workspace"
+CanvasElement = require "res.lib.CanvasElement"
 
 -- LOVE 2D CALLBACKS --
 function love.load()
     MainWorkspace = Workspace:new()
+    CanvasElement1 = CanvasElement:new()
+    MainWorkspace:addElement(CanvasElement1)
 end
 
 function love.update(dt)
@@ -30,7 +33,10 @@ end
 
 function love.mousemoved(x, y, dx, dy, istouch)
     if (not istouch) and love.mouse.isDown(3) then
+        love.mouse.setRelativeMode(true)
         MainWorkspace:moveOffset(dx, dy)
+    else
+        love.mouse.setRelativeMode(false)
     end
 end
 
